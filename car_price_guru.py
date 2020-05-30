@@ -33,4 +33,14 @@ x_df = pd.get_dummies(x_df, columns=["Year"])
 
 # Splitting the dataset into the Training set and Test set
 from sklearn.model_selection import train_test_split
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 1/3, random_state = 0)
+X_train, X_test, y_train, y_test = train_test_split(x_df, y_df, test_size = .1, random_state = 0)
+
+#Training a simple linear regression model
+from sklearn.linear_model import LinearRegression
+regressor = LinearRegression()
+regressor.fit(X_train, y_train)
+
+#testing routine
+from sklearn.metrics import mean_squared_error
+y_pred = regressor.predict(X_train)
+mean_squared_error(y_train, y_pred)
